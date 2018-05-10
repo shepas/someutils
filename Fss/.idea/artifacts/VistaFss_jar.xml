@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VistaFss.jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/VistaFss_jar</output-path>
+    <root id="archive" name="fuckinFss.jar">
+      <element id="module-output" name="fuckinFss" />
+    </root>
+  </artifact>
+</component>

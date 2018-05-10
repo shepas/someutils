@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_vistafss" default="compile.module.vistafss">
+  <dirname property="module.vistafss.basedir" file="${ant.file.module_vistafss}"/>
+  
+  <property name="module.jdk.home.vistafss" value="${jdk.home.1.7}"/>
+  <property name="module.jdk.bin.vistafss" value="${jdk.bin.1.7}"/>
+  <property name="module.jdk.classpath.vistafss" value="jdk.classpath.1.7"/>
+  
+  <property name="compiler.args.vistafss" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="vistafss.output.dir" value="${module.vistafss.basedir}/target/classes"/>
+  <property name="vistafss.testoutput.dir" value="${module.vistafss.basedir}/target/test-classes"/>
+  
+  <path id="vistafss.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="vistafss.module.production.classpath">
+    <path refid="${module.jdk.classpath.vistafss}"/>
+    <path refid="library.maven:_org.apache.ws.security:wss4j:1.6.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_org.apache.santuario:xmlsec:1.5.2.classpath"/>
+    <path refid="library.maven:_org.opensaml:opensaml:2.5.1-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:openws:1.4.2-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:xmltooling:1.3.2-1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.6.1.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:1.6.2.classpath"/>
+  </path>
+  
+  <path id="vistafss.runtime.production.module.classpath">
+    <pathelement location="${vistafss.output.dir}"/>
+    <path refid="library.maven:_org.apache.ws.security:wss4j:1.6.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_org.apache.santuario:xmlsec:1.5.2.classpath"/>
+    <path refid="library.maven:_org.opensaml:opensaml:2.5.1-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:openws:1.4.2-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:xmltooling:1.3.2-1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.6.1.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:1.6.2.classpath"/>
+  </path>
+  
+  <path id="vistafss.module.classpath">
+    <path refid="${module.jdk.classpath.vistafss}"/>
+    <pathelement location="${vistafss.output.dir}"/>
+    <path refid="library.maven:_org.apache.ws.security:wss4j:1.6.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_org.apache.santuario:xmlsec:1.5.2.classpath"/>
+    <path refid="library.maven:_org.opensaml:opensaml:2.5.1-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:openws:1.4.2-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:xmltooling:1.3.2-1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.6.1.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:1.6.2.classpath"/>
+  </path>
+  
+  <path id="vistafss.runtime.module.classpath">
+    <pathelement location="${vistafss.testoutput.dir}"/>
+    <pathelement location="${vistafss.output.dir}"/>
+    <path refid="library.maven:_org.apache.ws.security:wss4j:1.6.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_org.apache.santuario:xmlsec:1.5.2.classpath"/>
+    <path refid="library.maven:_org.opensaml:opensaml:2.5.1-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:openws:1.4.2-1.classpath"/>
+    <path refid="library.maven:_org.opensaml:xmltooling:1.3.2-1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.6.1.classpath"/>
+    <path refid="library.maven:_joda-time:joda-time:1.6.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.vistafss">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.vistafss">
+    <patternset refid="excluded.from.module.vistafss"/>
+  </patternset>
+  
+  <path id="vistafss.module.sourcepath">
+    <dirset dir="${module.vistafss.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="vistafss.module.test.sourcepath">
+    <dirset dir="${module.vistafss.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.vistafss" depends="compile.module.vistafss.production,compile.module.vistafss.tests" description="Compile module VistaFss"/>
+  
+  <target name="compile.module.vistafss.production" depends="register.custom.compilers" description="Compile module VistaFss; production classes">
+    <mkdir dir="${vistafss.output.dir}"/>
+    <javac2 destdir="${vistafss.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.vistafss}/javac">
+      <compilerarg line="${compiler.args.vistafss}"/>
+      <bootclasspath refid="vistafss.module.bootclasspath"/>
+      <classpath refid="vistafss.module.production.classpath"/>
+      <src refid="vistafss.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.vistafss"/>
+    </javac2>
+    
+    <copy todir="${vistafss.output.dir}">
+      <fileset dir="${module.vistafss.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.vistafss.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.vistafss.tests" depends="register.custom.compilers,compile.module.vistafss.production" description="compile module VistaFss; test classes" unless="skip.tests">
+    <mkdir dir="${vistafss.testoutput.dir}"/>
+    <javac2 destdir="${vistafss.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.vistafss}/javac">
+      <compilerarg line="${compiler.args.vistafss}"/>
+      <bootclasspath refid="vistafss.module.bootclasspath"/>
+      <classpath refid="vistafss.module.classpath"/>
+      <src refid="vistafss.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.vistafss"/>
+    </javac2>
+    
+    <copy todir="${vistafss.testoutput.dir}">
+      <fileset dir="${module.vistafss.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.vistafss" description="cleanup module">
+    <delete dir="${vistafss.output.dir}"/>
+    <delete dir="${vistafss.testoutput.dir}"/>
+  </target>
+</project>

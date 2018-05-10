@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_fuckinfss" default="compile.module.fuckinfss">
+  <dirname property="module.fuckinfss.basedir" file="${ant.file.module_fuckinfss}"/>
+  
+  <property name="module.jdk.home.fuckinfss" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.fuckinfss" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.fuckinfss" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.fuckinfss" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="fuckinfss.output.dir" value="${module.fuckinfss.basedir}/../out/production/fuckinFss"/>
+  <property name="fuckinfss.testoutput.dir" value="${module.fuckinfss.basedir}/../out/test/fuckinFss"/>
+  
+  <path id="fuckinfss.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="fuckinfss.module.production.classpath">
+    <path refid="${module.jdk.classpath.fuckinfss}"/>
+  </path>
+  
+  <path id="fuckinfss.runtime.production.module.classpath">
+    <pathelement location="${fuckinfss.output.dir}"/>
+  </path>
+  
+  <path id="fuckinfss.module.classpath">
+    <path refid="${module.jdk.classpath.fuckinfss}"/>
+    <pathelement location="${fuckinfss.output.dir}"/>
+  </path>
+  
+  <path id="fuckinfss.runtime.module.classpath">
+    <pathelement location="${fuckinfss.testoutput.dir}"/>
+    <pathelement location="${fuckinfss.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.fuckinfss">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.fuckinfss">
+    <patternset refid="excluded.from.module.fuckinfss"/>
+  </patternset>
+  
+  
+  <target name="compile.module.fuckinfss" depends="compile.module.fuckinfss.production,compile.module.fuckinfss.tests" description="Compile module fuckinFss"/>
+  
+  <target name="compile.module.fuckinfss.production" depends="register.custom.compilers" description="Compile module fuckinFss; production classes"/>
+  
+  <target name="compile.module.fuckinfss.tests" depends="register.custom.compilers,compile.module.fuckinfss.production" description="compile module fuckinFss; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.fuckinfss" description="cleanup module">
+    <delete dir="${fuckinfss.output.dir}"/>
+    <delete dir="${fuckinfss.testoutput.dir}"/>
+  </target>
+</project>
